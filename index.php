@@ -7,17 +7,18 @@
     <title>留言板</title>
     <style>
         div.card {
-            width: 400px;
+            width: 800px;
             font-weight: normal;
             box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.4), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
             text-align: center;
         }
 
         div.header {
-            height:300px;
+            height:200px;
             color: black;
             padding: 5px;
             font-size: 18px;
+            margin: 5;
         }
 
         div.container {
@@ -25,15 +26,18 @@
             background-color: #e5eecc;
             height: 50px;
             padding: 10px;
+            margin: 5;
         }
         
         ul.pagination {
             display: inline-block;
             padding: 0;
-            margin: 0;
         }
 
-        ul.pagination li {display: inline;}
+        ul.pagination li {
+            display: inline;
+            margin: 10;
+            }
 
         ul.pagination li a {
             color: black;
@@ -62,15 +66,27 @@
     </header>
     <br>
     <div class="card">
-        
-        <div class="container">
-            <p>author 2020-1-22</p>
-        </div>
-        <div class="header">
-            content<br>content
-        </div>        
+        <?php
+        $link = mysqli_connect('localhost', 'root', 'root') or die('Connect error');
+        mysqli_set_charset($link, 'utf8');
+        mysqli_select_db($link, 'test') or die('Database Open Error');
+        $sql = "SELECT * FROM content ORDER BY time";
+        $result = mysqli_query($link, $sql);
+        while ($row = $result->fetch_row()) {
+        ?>
+            <div class="container">
+                <p>
+                    <?php
+                    echo $row[0],"&nbsp;&nbsp;",$row[2];
+                    ?>
+                </p>
+            </div>
+            <div class="header">
+                <?php
+                echo $row[1];
+                ?>
+            </div>
 
-    </div>
-    <br>
+        <?php } ?>
 </body>
 </html>

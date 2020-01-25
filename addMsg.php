@@ -4,7 +4,7 @@
  * 将留言数据写入数据表content中
  */
 
-$username = $_COOKIE['username']; //这里不知道怎么传username
+$username = $_COOKIE['username'];
 $messages = $_POST['messages'];
 
 $link = mysqli_connect('localhost', 'root', 'root', 'test') or die('Connect error');
