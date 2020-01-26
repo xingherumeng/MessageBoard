@@ -4,15 +4,19 @@
  * 将留言数据写入数据表content中
  */
 
-$username = $_COOKIE['username'];
+$username = $_COOKIE['username']; //这里不知道怎么传username
 $messages = $_POST['messages'];
 
 $link = mysqli_connect('localhost', 'root', 'root', 'test') or die('Connect error');
-$sql = "INSERT into content(username, messages) VALUES('$username', '$messages')";
+$date = date('Y-m-d H:i:s');
+$sql = "INSERT into content(username, messages, time) VALUES('$username', '$messages', '$date')";
 
-// echo $sql;
 if (mysqli_query($link, $sql)) {
-    echo "<script>alert(\"插入成功!\")</script>";
+    exit("<script>
+        alert('插入成功!');
+		location.href = 'index.php';
+        </script>
+        ");
 } else {
     echo "Error: " . $sql . "<br>" . mysqli_error($link);
 }

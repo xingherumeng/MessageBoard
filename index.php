@@ -7,29 +7,32 @@
     <title>留言板</title>
     <style>
         div.card {
+            margin-left: 280px; margin-top: 0px; margin-bottom: 20px;
+            text-align: center;
             width: 800px;
             font-weight: normal;
             box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.4), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
-            text-align: center;
         }
 
         div.header {
-            height:200px;
+            text-align: left;
+            height:150px;
             color: black;
             padding: 5px;
             font-size: 18px;
-            margin: 5;
+            margin: 5px;
         }
 
         div.container {
+            text-align: left;
             font-size: 18px;
             background-color: #e5eecc;
-            height: 50px;
+            height: 40px;
             padding: 10px;
-            margin: 5;
         }
-        
+
         ul.pagination {
+            margin-left: 560px;
             display: inline-block;
             padding: 0;
         }
@@ -37,7 +40,7 @@
         ul.pagination li {
             display: inline;
             margin: 10;
-            }
+        }
 
         ul.pagination li a {
             color: black;
@@ -58,14 +61,14 @@
 </head>
 <body>
     <header class="topbar">
-		<h1>留言板</h1>
-            <ul class="pagination">
+		<h1 style="text-align: center">留言板</h1>
+            <ul class="pagination" style="text-align: center">
                 <li><a href="" class="active">所有留言</a></li>
                 <li><a href="add-front.php">添加留言</a></li>
             </ul>
     </header>
     <br>
-    <div class="card">
+    <div class="card" style="text-align: center">
         <?php
         $link = mysqli_connect('localhost', 'root', 'root') or die('Connect error');
         mysqli_set_charset($link, 'utf8');
@@ -77,7 +80,13 @@
             <div class="container">
                 <p>
                     <?php
-                    echo $row[0],"&nbsp;&nbsp;",$row[2];
+                    echo $row[0], "&nbsp;&nbsp;发布时间： ", $row[2], "&nbsp;&nbsp;";
+                    // var_dump($_COOKIE);
+                    if ($row[0] = $_COOKIE['username']) {
+                        ?>
+                        <a href="delMsg.php?username=<?php echo $row[0]?>&messages=<?php echo $row[1]?>&time=<?php echo $row[2]?>">删除留言</a>
+                        <?php                 
+                    }
                     ?>
                 </p>
             </div>
