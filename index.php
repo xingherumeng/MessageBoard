@@ -11,24 +11,25 @@
             text-align: center;
             width: 800px;
             font-weight: normal;
-            box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.4), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+            /* box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.4), 0 6px 20px 0 rgba(0, 0, 0, 0.19); */
         }
 
         div.header {
+            text-align: left;
+            font-size: 18px;
+            height: 40px;
+            padding: 10px;
+        }
+
+        div.container {
             text-align: left;
             height:150px;
             color: black;
             padding: 5px;
             font-size: 18px;
             margin: 5px;
-        }
-
-        div.container {
-            text-align: left;
-            font-size: 18px;
-            background-color: #e5eecc;
-            height: 40px;
-            padding: 10px;
+            background-color: #f2f2f2;
+            
         }
 
         ul.pagination {
@@ -77,7 +78,7 @@
         $result = mysqli_query($link, $sql);
         while ($row = $result->fetch_row()) {
         ?>
-            <div class="container">
+            <div class="header">
                 <p>
                     <?php
                     echo $row[0], "&nbsp;&nbsp;发布时间： ", $row[2], "&nbsp;&nbsp;";
@@ -85,17 +86,16 @@
                     if ($row[0] = $_COOKIE['username']) {
                         ?>
                         <a href="delMsg.php?username=<?php echo $row[0]?>&messages=<?php echo $row[1]?>&time=<?php echo $row[2]?>">删除留言</a>
-                        <?php                 
+                        <?php
                     }
                     ?>
                 </p>
             </div>
-            <div class="header">
+            <div class="container">
                 <?php
-                echo $row[1];
+                    echo $row[1];
                 ?>
             </div>
-
         <?php } ?>
 </body>
 </html>

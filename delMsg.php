@@ -3,6 +3,7 @@
  * 处理留言的删除
  * 将username等参数用get方式传入
  */
+
 $username = $_GET['username'];
 $messages = $_GET['messages'];
 $time = $_GET['time'];

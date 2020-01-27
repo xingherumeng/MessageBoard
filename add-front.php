@@ -6,7 +6,7 @@
  */
 
 // 先插入一条记录zz
-$sql = 'INSERT user(username, password, email) VALUES("zz", "'.md5('zz').'", "2333@qq.com")';
+// $sql = 'INSERT user(username, password, email) VALUES("zz", "'.md5('zz').'", "2333@qq.com")';
 
 // 如果未登录就跳转到login-front.php
     if (!isset($_COOKIE['username'])) {
@@ -54,21 +54,30 @@ $sql = 'INSERT user(username, password, email) VALUES("zz", "'.md5('zz').'", "23
     <meta charset="utf-8">
     <title>添加留言</title>
     <style> 
-        .textarea {
-            border:1px solid #d1d1d1;
-            padding:10px 50px; 
-            width:300px;
+        textarea {
+            outline-style: none;
+            border: 1px solid #b1c1a9;
+            padding: 10px 20px; 
+            width: 600px;
+            font-size: 18px;
+            font-family: "Microsoft YaHei"; 
         }
-        .button {
+
+        button {
+			background-color: #6abe64;
             color: white;
-            padding: 5px 16px;
+			width: 300px;
+			padding: 15px 32px;
+			border-radius: 8px;
             text-align: center;
             text-decoration: none;
             display: inline-block;
             font-size: 18px;
-            transition-duration: 0.4s;
-            cursor: pointer;
-            color: black;
+			border: none;
+		}
+        
+        div {
+            text-align: center;
         }
     </style>
 </head>
@@ -76,17 +85,13 @@ $sql = 'INSERT user(username, password, email) VALUES("zz", "'.md5('zz').'", "23
 <body>
     <section class="contact-w3layouts jarallax" id="contact" >
     <div class="container">
-        <h3 class="text-center">添加留言</h3>
+        <h1 style="text-align: center">添加留言</h3>
         <div> 
             <form method="POST" action="addMsg.php">
                 <div class="form-group"> 
-                    <div class="control-group">
-                        <div class="control">
-                            <label for="messages">想说的话:</label><br>
-                            <textarea rows="10" cols="80" class="form-control" id="messages" required data-validation-required-message="Please enter your message" maxlength="999" style="resize:none" name="messages"></textarea>
-                        </div>
-                    </div>
+                    <textarea rows="10" placeholder="说点什么吧…" class="form-control" id="messages" required data-validation-required-message="Please enter your message" maxlength="999" style="resize:none" name="messages"></textarea>
                 </div>  
+                <br>
                 <div class="button">    
                     <button type="submit" class="button">提交</button>
                 </div> 
