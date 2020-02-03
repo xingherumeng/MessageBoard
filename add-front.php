@@ -5,8 +5,7 @@
  * 将留言提交到addMsg.php
  */
 
-// 先插入一条记录zz
-// $sql = 'INSERT user(username, password, email) VALUES("zz", "'.md5('zz').'", "2333@qq.com")';
+require_once 'config.php';
 
 // 如果未登录就跳转到login-front.php
     if (!isset($_COOKIE['username'])) {
@@ -20,11 +19,8 @@
         $auth = $_COOKIE['auth'];
         $resArr = explode(':', $auth);  //拆分后的数组
         $userId = end($resArr); 
-        $link = mysqli_connect('localhost', 'root', 'root') or die('Connect error');
-        mysqli_set_charset($link, 'utf8');
-        mysqli_select_db($link, 'test') or die('Database Open Error');
         $sql = "SELECT id, username, password FROM user WHERE id = $userId";
-        $result = mysqli_query($link, $sql);
+        $result = config($sql);
         if (mysqli_num_rows($result) == 1) {
             $row = mysqli_fetch_assoc($result);
             $username = $row['username'];

@@ -25,7 +25,7 @@
             text-align: left;
             height:150px;
             color: black;
-            padding: 5px;
+            padding: 10px;
             font-size: 18px;
             margin: 5px;
             background-color: #f2f2f2;
@@ -71,11 +71,9 @@
     <br>
     <div class="card" style="text-align: center">
         <?php
-        $link = mysqli_connect('localhost', 'root', 'root') or die('Connect error');
-        mysqli_set_charset($link, 'utf8');
-        mysqli_select_db($link, 'test') or die('Database Open Error');
+        require_once 'config.php';
         $sql = "SELECT * FROM content ORDER BY time";
-        $result = mysqli_query($link, $sql);
+        $result = config($sql);
         while ($row = $result->fetch_row()) {
         ?>
             <div class="header">

@@ -3,15 +3,16 @@
  * 接收add-front.php中传入的留言数据$messages
  * 将留言数据写入数据表content中
  */
+require_once 'config.php';
 
 $username = $_COOKIE['username']; //这里不知道怎么传username
 $messages = $_POST['messages'];
 
-$link = mysqli_connect('localhost', 'root', 'root', 'test') or die('Connect error');
 $date = date('Y-m-d H:i:s');
 $sql = "INSERT into content(username, messages, time) VALUES('$username', '$messages', '$date')";
+$result = config($sql);
 
-if (mysqli_query($link, $sql)) {
+if ($result == 1) {
     exit("<script>
         alert('插入成功!');
 		location.href = 'index.php';

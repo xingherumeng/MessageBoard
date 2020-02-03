@@ -4,22 +4,19 @@
  * 登录成功跳转到index.php
  * 登录失败跳转到login-front.php
  */
+require_once 'config.php';
+
 $username = $_POST['username'];
 $password = md5($_POST['password']);
 $autoLogin = $_POST['autoLogin'];
 
-$link = mysqli_connect('localhost', 'root', 'root') or die('Connect Error');
-mysqli_set_charset($link, 'utf8');
-mysqli_select_db($link, 'test') or die('Database Open Error');
-
 $sql = "SELECT id, username FROM user WHERE username='{$username}' && password = '{$password}' ";
+$result = config($sql);
 // echo $sql;
 // $rc = mysqli_affected_rows($link);
 // echo "受影响条数: " . $rc;
 
 // $sql = mysqli_escape_string($link, $sql);
-$result = mysqli_query($link, $sql);
-var_dump($result);
 
 if (mysqli_num_rows($result) == 1) {
 	// if ($autoLogin == 1) {

@@ -3,6 +3,7 @@
  * 处理留言的删除
  * 将username等参数用get方式传入
  */
+require_once 'config.php';
 
 $username = $_GET['username'];
 $messages = $_GET['messages'];
@@ -12,12 +13,11 @@ echo $messages;
 echo $time;
 
 $link = mysqli_connect('localhost', 'root', 'root') or die('Connect Error');
-mysqli_set_charset($link, 'utf8');
-mysqli_select_db($link, 'test') or die('Database Open Error');
 $sql = "DELETE FROM content WHERE username='{$username}' && messages = '{$messages}' && time = '{$time}'";
-$result = mysqli_query($link, $sql);
+$result = config($sql);
+var_dump($link);
 
-if (mysqli_affected_rows($link) == 1) {
+if (mysqli_affected_rows($link)) {
     exit("<script>
         alert('删除成功');
         location.href = 'index.php';
