@@ -54,11 +54,6 @@
 			<input type="password" name="password" class="form-control" id="password" placeholder="请输入密码">		
 		</div>
 		<br><br>
-<!-- 	<div class="checkbox">
-			<label>
-				<input type="checkbox" name="autologin" value="1">一周内自动登录
-			</label>
-		</div> -->
 		<div>
 			<button type="submit" class="button">立即登录</button>
 		</div>

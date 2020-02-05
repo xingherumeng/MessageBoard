@@ -14,17 +14,16 @@ $sql = "SELECT id, username FROM user WHERE username='{$username}' && password =
 $result = config($sql);
 
 if (mysqli_num_rows($result) == 1) {
-	// if ($autoLogin == 1) {
-		$row = mysqli_fetch_assoc($result);
-		$_SESSION['username'] = $row['username'];
-		$_SESSION['isLogin'] = 1;
-		$salt = 'king';
-		$auth = md5($username.$password.$salt).":".$row['id'];
-		setcookie('auth', $auth, strtotime('+7 days'));
-		exit ("<script>
-			alert('登录成功');
-			location.href = 'index.php';
-			</script>");
+	$row = mysqli_fetch_assoc($result);
+	$salt = 'king';
+	$auth = md5($username.$password.$salt).":".$row['id'];
+	$_SESSION['auth'] = $auth;
+	$_SESSION['username'] = $row['username'];
+	$_SESSION['isLogin'] = 1;
+	exit ("<script>
+		alert('登录成功');
+		location.href = 'index.php';
+		</script>");
 } else {
 	exit("<script>
 		alert('登录失败');

@@ -6,7 +6,7 @@
 require_once 'config.php';
 
 session_start();
-$username = $_SESSION['username']; //这里不知道怎么传username
+$username = $_SESSION['username'];
 $messages = $_POST['messages'];
 
 $date = date('Y-m-d H:i:s');
@@ -22,5 +22,3 @@ if ($result == 1) {
 } else {
     echo "Error: " . $sql . "<br>" . mysqli_error($link);
 }
-// $result = $link->exec($link, $sql);
-// $row = mysqli_fetch_assoc($result);

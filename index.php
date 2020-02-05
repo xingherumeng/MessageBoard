@@ -72,6 +72,7 @@
     <div class="card" style="text-align: center">
         <?php
         require_once 'config.php';
+        session_start();
         $sql = "SELECT * FROM content ORDER BY time";
         $result = config($sql);
         while ($row = $result->fetch_row()) {
@@ -80,8 +81,7 @@
                 <p>
                     <?php
                     echo $row[0], "&nbsp;&nbsp;发布时间： ", $row[2], "&nbsp;&nbsp;";
-                    // var_dump($_COOKIE);
-                    if ($row[0] = $_COOKIE['username']) {
+                    if ($row[0] = $_SESSION['username']) {
                         ?>
                         <a href="delMsg.php?username=<?php echo $row[0]?>&messages=<?php echo $row[1]?>&time=<?php echo $row[2]?>">删除留言</a>
                         <?php
@@ -94,6 +94,8 @@
                     echo $row[1];
                 ?>
             </div>
-        <?php } ?>
+        <?php 
+    } 
+    ?>
 </body>
 </html>

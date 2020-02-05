@@ -9,7 +9,7 @@ require_once 'config.php';
 
 session_start();
 // 如果未登录就跳转到login-front.php
-if (!isset($_SESSION['isLogin']) || !isset($_SESSION['username'])) {
+if (!isset($_SESSION['isLogin']) || !isset($_SESSION['username']) || !isset($_SESSION['auth'])) {
     exit("<script>
         alert('请先登录');
         location.href = 'login-front.php';
@@ -17,8 +17,8 @@ if (!isset($_SESSION['isLogin']) || !isset($_SESSION['username'])) {
 }
 
 // 校验用户登录凭证
-if (isset($_COOKIE['auth'])) {
-    $auth = $_COOKIE['auth'];
+if (isset($_SESSION['auth'])) {
+    $auth = $_SESSION['auth'];
     $resArr = explode(':', $auth);  //拆分后的数组
     $userId = end($resArr); 
     $sql = "SELECT id, username, password FROM user WHERE id = $userId";
