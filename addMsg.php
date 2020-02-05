@@ -5,7 +5,8 @@
  */
 require_once 'config.php';
 
-$username = $_COOKIE['username']; //这里不知道怎么传username
+session_start();
+$username = $_SESSION['username']; //这里不知道怎么传username
 $messages = $_POST['messages'];
 
 $date = date('Y-m-d H:i:s');

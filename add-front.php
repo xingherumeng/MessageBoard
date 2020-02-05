@@ -7,39 +7,41 @@
 
 require_once 'config.php';
 
+session_start();
 // 如果未登录就跳转到login-front.php
-    if (!isset($_COOKIE['username'])) {
-        exit("<script>
-            alert('请先登录');
-            location.href = 'login-front.php';
-            </script>");
-    }
-    // 校验用户登录凭证
-    if (isset($_COOKIE['auth'])) {
-        $auth = $_COOKIE['auth'];
-        $resArr = explode(':', $auth);  //拆分后的数组
-        $userId = end($resArr); 
-        $sql = "SELECT id, username, password FROM user WHERE id = $userId";
-        $result = config($sql);
-        if (mysqli_num_rows($result) == 1) {
-            $row = mysqli_fetch_assoc($result);
-            $username = $row['username'];
-            $password = $row['password'];
-            $salt = 'king';
-            $authStr = md5($username.$password.$salt);
-            //.表示字符串拼接
-            if ($authStr != $resArr[0]) {
-                exit("<script>
-                    alert('请先登录')；
-                    location.href = 'login-front.php';
-                    </script>");
-            }
-        } else {
+if (!isset($_SESSION['isLogin']) || !isset($_SESSION['username'])) {
+    exit("<script>
+        alert('请先登录');
+        location.href = 'login-front.php';
+        </script>");
+}
+
+// 校验用户登录凭证
+if (isset($_COOKIE['auth'])) {
+    $auth = $_COOKIE['auth'];
+    $resArr = explode(':', $auth);  //拆分后的数组
+    $userId = end($resArr); 
+    $sql = "SELECT id, username, password FROM user WHERE id = $userId";
+    $result = config($sql);
+    if (mysqli_num_rows($result) == 1) {
+        $row = mysqli_fetch_assoc($result);
+        $username = $row['username'];
+        $password = $row['password'];
+        $salt = 'king';
+        $authStr = md5($username.$password.$salt);
+        //.表示字符串拼接
+        if ($authStr != $resArr[0]) {
             exit("<script>
-                alert('请先登录');
-                location.href = 'login-front.php'
+                alert('请先登录')；
+                location.href = 'login-front.php';
                 </script>");
         }
+    } else {
+        exit("<script>
+            alert('请先登录');
+            location.href = 'login-front.php'
+            </script>");
+    }
 }
 ?>
 
