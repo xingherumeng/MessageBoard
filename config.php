@@ -1,13 +1,19 @@
 <?php
 /**
  * 处理数据库的连接
- * 选择数据库test
- * 返回sql语句的执行结果$result
  */
 function config($sql) {
-    $link = mysqli_connect('localhost', 'root', 'root') or die('Connect Error');
-    mysqli_set_charset($link, 'utf8');
-    mysqli_select_db($link, 'test') or die('Database Open Error');
+    $config = [
+        'db_host' => 'localhost',
+        'db_user' => 'root',
+        'db_pass' => 'root',
+        'db_name' => 'test',
+        'db_charset' => 'utf8',
+    ];
+
+    $link = mysqli_connect($config['db_host'], $config['db_user'], $config['db_pass']) or die('Connect Error');
+    mysqli_set_charset($link, $config['db_charset']);
+    mysqli_select_db($link, $config['db_name']) or die('Database Open Error');
     $result = mysqli_query($link, $sql);
     return $result;
 }
