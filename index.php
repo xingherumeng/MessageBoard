@@ -83,7 +83,7 @@
                     echo $row[0], "&nbsp;&nbsp;发布时间： ", $row[2], "&nbsp;&nbsp;";
                     if ($row[0] = $_SESSION['username']) {
                         ?>
-                        <a href="delMsg.php?username=<?php echo $row[0]?>&messages=<?php echo $row[1]?>&time=<?php echo $row[2]?>">删除留言</a>
+                        <a href="Message.class.php?act=delMsg&username=<?php echo $row[0]?>&messages=<?php echo $row[1]?>&time=<?php echo $row[2]?>">删除留言</a>
                         <?php
                     }
                     ?>
