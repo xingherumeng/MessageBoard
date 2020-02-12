@@ -80,10 +80,11 @@
             <div class="header">
                 <p>
                     <?php
-                    echo $row[0], "&nbsp;&nbsp;发布时间： ", $row[2], "&nbsp;&nbsp;";
-                    if ($row[0] = $_SESSION['username']) {
+                    echo $row[1], "&nbsp;&nbsp;发布时间： ", $row[3], "&nbsp;&nbsp;";
+                    if ($row[1] = $_SESSION['username']) {
                         ?>
-                        <a href="Message.class.php?act=delMsg&username=<?php echo $row[0]?>&messages=<?php echo $row[1]?>&time=<?php echo $row[2]?>">删除留言</a>
+                        <a href="modify-front.php?username=<?php echo $row[1]?>&messages=<?php echo $row[2]?>&time=<?php echo $row[3]?>">修改留言</a>
+                        <a href="Message.class.php?act=delMsg&username=<?php echo $row[1]?>&messages=<?php echo $row[2]?>&time=<?php echo $row[3]?>">删除留言</a>
                         <?php
                     }
                     ?>
@@ -91,7 +92,7 @@
             </div>
             <div class="container">
                 <?php
-                    echo $row[1];
+                    echo $row[2];
                 ?>
             </div>
         <?php 
