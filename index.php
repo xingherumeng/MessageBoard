@@ -25,7 +25,7 @@
             text-align: left;
             height:150px;
             color: black;
-            padding: 10px;
+            padding: 14px;
             font-size: 18px;
             margin: 5px;
             background-color: #f2f2f2;
@@ -73,7 +73,7 @@
         <?php
         require_once 'config.php';
         session_start();
-        $sql = "SELECT * FROM content ORDER BY time";
+        $sql = "SELECT * FROM content ORDER BY date_time";
         $result = config($sql);
         while ($row = $result->fetch_row()) {
         ?>
@@ -83,8 +83,8 @@
                     echo $row[1], "&nbsp;&nbsp;发布时间： ", $row[3], "&nbsp;&nbsp;";
                     if ($row[1] = $_SESSION['username']) {
                         ?>
-                        <a href="modify-front.php?username=<?php echo $row[1]?>&messages=<?php echo $row[2]?>&time=<?php echo $row[3]?>">修改留言</a>
-                        <a href="Message.class.php?act=delMsg&username=<?php echo $row[1]?>&messages=<?php echo $row[2]?>&time=<?php echo $row[3]?>">删除留言</a>
+                        <a href="modify-front.php?id=<?php echo $row[0]?>&messages=<?php echo $row[2]?>">修改留言</a>
+                        <a href="Message.class.php?act=delMsg&id=<?php echo $row[0]?>">删除留言</a>
                         <?php
                     }
                     ?>

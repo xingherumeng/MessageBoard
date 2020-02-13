@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- 主机： localhost
--- 生成日期： 2020-02-03 22:28:38
+-- 生成日期： 2020-02-13 14:46:17
 -- 服务器版本： 5.6.27-log
 -- PHP 版本： 7.3.4
 
@@ -29,22 +29,22 @@ SET time_zone = "+00:00";
 --
 
 CREATE TABLE `content` (
+  `id` int(11) NOT NULL,
   `username` varchar(99) NOT NULL,
   `messages` varchar(999) NOT NULL,
-  `time` datetime NOT NULL
+  `date_time` datetime NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- 转存表中的数据 `content`
 --
 
-INSERT INTO `content` (`username`, `messages`, `time`) VALUES
-('zz', 'd2333333', '2020-01-27 14:51:39'),
-('zz', 'zzzzzzzzzz', '2020-01-31 12:43:08'),
-('zz', 'w', '2020-01-31 12:45:09'),
-('zz', 'e', '2020-01-31 12:45:46'),
-('zz', '2333', '2020-01-31 23:05:44'),
-('zz', '23333', '2020-02-03 22:02:13');
+INSERT INTO `content` (`id`, `username`, `messages`, `date_time`) VALUES
+(1, 'zz', '11', '2020-02-12 21:56:59'),
+(3, 'zz', '2', '2020-02-13 14:42:36'),
+(4, 'zz', '2222222222222222222222', '2020-02-13 14:42:41'),
+(5, 'zz', '233333333', '2020-02-13 14:42:45'),
+(6, 'zz', 'ddddddddddddd', '2020-02-13 14:42:55');
 
 -- --------------------------------------------------------
 
@@ -64,6 +64,40 @@ CREATE TABLE `user` (
 
 INSERT INTO `user` (`id`, `username`, `password`) VALUES
 (1, 'zz', '25ed1bcb423b0b7200f485fc5ff71c8e');
+
+--
+-- 转储表的索引
+--
+
+--
+-- 表的索引 `content`
+--
+ALTER TABLE `content`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `id` (`id`);
+
+--
+-- 表的索引 `user`
+--
+ALTER TABLE `user`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `id` (`id`);
+
+--
+-- 在导出的表使用AUTO_INCREMENT
+--
+
+--
+-- 使用表AUTO_INCREMENT `content`
+--
+ALTER TABLE `content`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+
+--
+-- 使用表AUTO_INCREMENT `user`
+--
+ALTER TABLE `user`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

@@ -8,9 +8,9 @@
 require_once 'config.php';
 
 session_start();
-$username = $_GET['username'];
+$id = $_GET['id'];
 $messages = $_GET['messages'];
-$time = $_GET['time'];
+
 // 如果未登录就跳转到login-front.php
 if (!isset($_SESSION['isLogin']) || !isset($_SESSION['username']) || !isset($_SESSION['auth'])) {
     exit("<script>
@@ -88,7 +88,7 @@ if (isset($_SESSION['auth'])) {
     <div class="container">
         <h1 style="text-align: center">修改留言</h3>
         <div> 
-            <form method="POST" action="Message.class.php?act=modMsg&messages=<?php echo $messages ?>&time=<?php echo $time ?>">
+            <form method="POST" action="Message.class.php?act=modMsg&id=<?php echo $id ?>">
                 <div class="form-group"> 
                     <textarea rows="10" placeholder="<?php echo $messages ?>" class="form-control" id="new_messages" required data-validation-required-message="Please enter your message" maxlength="999" style="resize:none" name="new_messages"></textarea>
                 </div>  
