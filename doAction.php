@@ -4,14 +4,14 @@
  * 登录成功跳转到index.php
  * 登录失败跳转到login-front.php
  */
-require_once 'config.php';
+include('config.php');
 
 session_start();
 $username = $_POST['username'];
 $password = md5($_POST['password']);
 
 $sql = "SELECT id, username FROM user WHERE username='{$username}' && password = '{$password}' ";
-$result = config($sql);
+$result = mysqli_query($link, $sql);
 
 if (mysqli_num_rows($result) == 1) {
 	$row = mysqli_fetch_assoc($result);

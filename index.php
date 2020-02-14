@@ -71,10 +71,11 @@
     <br>
     <div class="card" style="text-align: center">
         <?php
-        require_once 'config.php';
+        include('config.php');
         session_start();
         $sql = "SELECT * FROM content ORDER BY date_time";
-        $result = config($sql);
+        $result = mysqli_query($link, $sql);
+
         while ($row = $result->fetch_row()) {
         ?>
             <div class="header">

@@ -5,7 +5,7 @@
  * 删除留言：act=delMsg，调用delMsg
  * 修改留言：接收modify-front.php中传入的留言数据，act=modMsg，调用modMsg
  */
-require_once 'config.php';
+
 session_start();
 
 class Message
@@ -16,8 +16,9 @@ class Message
 
     function addMsg($username, $messages, $date_time)
     {
+        include('config.php');
         $sql = "INSERT into content(username, messages, date_time) VALUES('$username', '$messages', '$date_time')";
-        $result = config($sql);
+        $result = mysqli_query($link, $sql);
 
         if ($result == 1) {
             exit("<script>
@@ -36,10 +37,9 @@ class Message
     }
     function delMsg($id)
     {
-        $link = mysqli_connect('localhost', 'root', 'root') or die('Connect Error');
+        include('config.php');
         $sql = "DELETE FROM content WHERE id='{$id}'";
-        $result = config($sql);
-        var_dump($link);
+        $result = mysqli_query($link, $sql);
 
         if (mysqli_affected_rows($link)) {
             exit("<script>
@@ -57,8 +57,9 @@ class Message
     }
     function modMsg($id, $new_messages)
     {
+        include('config.php');
         $sql = "UPDATE content SET messages = '{$new_messages}' WHERE id='{$id}'";
-        $result = config($sql);
+        $result = mysqli_query($link, $sql);
 
         if ($result == 1) {
             exit("<script>
@@ -84,20 +85,17 @@ switch($act) {
         $username = $_SESSION['username'];
         $messages = $_POST['messages'];
         $date_time = date('Y-m-d H:i:s');
-
         $message->addMsg($username, $messages, $date_time);
     break;
     case 'delMsg':
         //处理留言的删除
         $id = $_GET['id'];
-
         $message->delMsg($id);
     break;
     case 'modMsg':
         //处理留言的修改
         $id = $_GET['id'];
         $new_messages = $_POST['new_messages'];
-
         $message->modMsg($id, $new_messages);
     break;
 }

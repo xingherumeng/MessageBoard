@@ -5,7 +5,7 @@
  * 将留言提交到Message.class.php
  */
 
-require_once 'config.php';
+include('config.php');
 
 session_start();
 $id = $_GET['id'];
@@ -22,17 +22,16 @@ if (!isset($_SESSION['isLogin']) || !isset($_SESSION['username']) || !isset($_SE
 // 校验用户登录凭证
 if (isset($_SESSION['auth'])) {
     $auth = $_SESSION['auth'];
-    $resArr = explode(':', $auth);  //拆分后的数组
+    $resArr = explode(':', $auth);
     $userId = end($resArr); 
     $sql = "SELECT id, username, password FROM user WHERE id = $userId";
-    $result = config($sql);
+    $result = mysqli_query($link, $sql);
     if (mysqli_num_rows($result) == 1) {
         $row = mysqli_fetch_assoc($result);
         $username = $row['username'];
         $password = $row['password'];
         $salt = 'king';
         $authStr = md5($username.$password.$salt);
-        //.表示字符串拼接
         if ($authStr != $resArr[0]) {
             exit("<script>
                 alert('请先登录')；
