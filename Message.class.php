@@ -77,25 +77,25 @@ class Message
     }
 }
 
-$message = new Message();
-$act = $_GET['act'];
-switch($act) {
-    case 'addMsg':
-        //处理留言的添加
-        $username = $_SESSION['username'];
-        $messages = $_POST['messages'];
-        $date_time = date('Y-m-d H:i:s');
-        $message->addMsg($username, $messages, $date_time);
-    break;
-    case 'delMsg':
-        //处理留言的删除
-        $id = $_GET['id'];
-        $message->delMsg($id);
-    break;
-    case 'modMsg':
-        //处理留言的修改
-        $id = $_GET['id'];
-        $new_messages = $_POST['new_messages'];
-        $message->modMsg($id, $new_messages);
-    break;
-}
+// $message = new Message();
+// $act = $_GET['act'];
+// switch($act) {
+//     case 'addMsg':
+//         //处理留言的添加
+//         $username = $_SESSION['username'];
+//         $messages = $_POST['messages'];
+//         $date_time = date('Y-m-d H:i:s');
+//         $message->addMsg($username, $messages, $date_time);
+//     break;
+//     case 'delMsg':
+//         //处理留言的删除
+//         $id = $_GET['id'];
+//         $message->delMsg($id);
+//     break;
+//     case 'modMsg':
+//         //处理留言的修改
+//         $id = $_GET['id'];
+//         $new_messages = $_POST['new_messages'];
+//         $message->modMsg($id, $new_messages);
+//     break;
+// }

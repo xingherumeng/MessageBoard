@@ -72,9 +72,38 @@
     <div class="card" style="text-align: center">
         <?php
         include('config.php');
+        spl_autoload_register(function($Message){
+            if (is_file($Message . '.class.php')) {
+                require $Message . '.class.php';
+            }
+        });
+        
         session_start();
         $sql = "SELECT * FROM content ORDER BY date_time";
         $result = mysqli_query($link, $sql);
+        $message = new Message();
+
+        $act = $_GET['act'];
+        switch($act) {
+            case 'addMsg':
+                //处理留言的添加
+                $username = $_SESSION['username'];
+                $messages = $_POST['messages'];
+                $date_time = date('Y-m-d H:i:s');
+                $message->addMsg($username, $messages, $date_time);
+            break;
+            case 'delMsg':
+                //处理留言的删除
+                $id = $_GET['id'];
+                $message->delMsg($id);
+            break;
+            case 'modMsg':
+                //处理留言的修改
+                $id = $_GET['id'];
+                $new_messages = $_POST['new_messages'];
+                $message->modMsg($id, $new_messages);
+            break;
+        }
 
         while ($row = $result->fetch_row()) {
         ?>
@@ -85,7 +114,7 @@
                     if ($row[1] = $_SESSION['username']) {
                         ?>
                         <a href="modify-front.php?id=<?php echo $row[0]?>&messages=<?php echo $row[2]?>">修改留言</a>
-                        <a href="Message.class.php?act=delMsg&id=<?php echo $row[0]?>">删除留言</a>
+                        <a href="index.php?act=delMsg&id=<?php echo $row[0]?>">删除留言</a>
                         <?php
                     }
                     ?>

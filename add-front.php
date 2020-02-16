@@ -84,7 +84,7 @@ if (isset($_SESSION['auth'])) {
     <div class="container">
         <h1 style="text-align: center">添加留言</h3>
         <div> 
-            <form method="POST" action="Message.class.php?act=addMsg">
+            <form method="POST" action="index.php?act=addMsg">
                 <div class="form-group"> 
                     <textarea rows="10" placeholder="说点什么吧…" class="form-control" id="messages" required data-validation-required-message="Please enter your message" maxlength="999" style="resize:none" name="messages"></textarea>
                 </div>  

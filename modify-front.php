@@ -87,7 +87,7 @@ if (isset($_SESSION['auth'])) {
     <div class="container">
         <h1 style="text-align: center">修改留言</h3>
         <div> 
-            <form method="POST" action="Message.class.php?act=modMsg&id=<?php echo $id ?>">
+            <form method="POST" action="index.php?act=modMsg&id=<?php echo $id ?>">
                 <div class="form-group"> 
                     <textarea rows="10" placeholder="<?php echo $messages ?>" class="form-control" id="new_messages" required data-validation-required-message="Please enter your message" maxlength="999" style="resize:none" name="new_messages"></textarea>
                 </div>  
