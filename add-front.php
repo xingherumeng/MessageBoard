@@ -21,10 +21,13 @@ if (isset($_SESSION['auth'])) {
     $auth = $_SESSION['auth'];
     $resArr = explode(':', $auth);
     $userId = end($resArr); 
-    $sql = "SELECT id, username, password FROM user WHERE id = $userId";
-    $result = mysqli_query($link, $sql);
-    if (mysqli_num_rows($result) == 1) {
-        $row = mysqli_fetch_assoc($result);
+    $select=$pdo->prepare("SELECT id, username, password FROM user WHERE id = :userId");
+    $select->execute(array(
+        ":userId"=>$userId,
+    ));
+
+    if ($select->rowCount() == 1) {
+        $row = $select->fetch();
         $username = $row['username'];
         $password = $row['password'];
         $salt = 'king';

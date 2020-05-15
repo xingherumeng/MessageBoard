@@ -5,16 +5,18 @@
  * 登录失败跳转到login-front.php
  */
 include('config.php');
-
+global $pdo;
 session_start();
 $username = $_POST['username'];
 $password = md5($_POST['password']);
 
-$sql = "SELECT id, username FROM user WHERE username='{$username}' && password = '{$password}' ";
-$result = mysqli_query($link, $sql);
-
-if (mysqli_num_rows($result) == 1) {
-	$row = mysqli_fetch_assoc($result);
+$select=$pdo->prepare("SELECT id, username FROM user WHERE username=:username and password =:password");
+$select->execute(array(
+	":username"=>$username,
+	":password"=>$password,
+));
+if ($select->rowCount() == 1) {
+	$row = $select->fetch();
 	$salt = 'king';
 	$auth = md5($username.$password.$salt).":".$row['id'];
 	$_SESSION['auth'] = $auth;

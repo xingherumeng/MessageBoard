@@ -16,11 +16,16 @@ class Message
 
     function addMsg($username, $messages, $date_time)
     {
+        global $pdo;
         include('config.php');
-        $sql = "INSERT into content(username, messages, date_time) VALUES('$username', '$messages', '$date_time')";
-        $result = mysqli_query($link, $sql);
+        $select=$pdo->prepare("INSERT into content(username, messages, date_time) VALUES(:username, :messages, :date_time)");
+        $select->execute(array(
+            ":username"=>$username,
+            ":messages"=>$messages,
+            ":date_time"=>$date_time,
+        ));
 
-        if ($result == 1) {
+        if ($select->rowCount() == 1) {
             exit("<script>
                 alert('插入成功');
                 location.href = 'index.php';
@@ -37,11 +42,14 @@ class Message
     }
     function delMsg($id)
     {
+        global $pdo;
         include('config.php');
-        $sql = "DELETE FROM content WHERE id='{$id}'";
-        $result = mysqli_query($link, $sql);
+        $delete=$pdo->prepare("DELETE FROM content WHERE id=:id");
+        $delete->execute(array(
+            ":id"=>$id,
+        ));
 
-        if (mysqli_affected_rows($link)) {
+        if ($delete->rowCount()) {
             exit("<script>
                 alert('删除成功');
                 location.href = 'index.php';
@@ -57,11 +65,15 @@ class Message
     }
     function modMsg($id, $new_messages)
     {
+        global $pdo;
         include('config.php');
-        $sql = "UPDATE content SET messages = '{$new_messages}' WHERE id='{$id}'";
-        $result = mysqli_query($link, $sql);
+        $update=$pdo->prepare("UPDATE content SET messages =:new_messages WHERE id=:id");
+        $update->execute(array(
+            ":new_messages"=>$new_messages,
+            ":id"=>$id,
+        ));
 
-        if ($result == 1) {
+        if ($update->rowCount() == 1) {
             exit("<script>
                 alert('修改成功');
                 location.href = 'index.php';

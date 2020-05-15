@@ -78,9 +78,10 @@
             }
         });
         
+        global $pdo;
         session_start();
-        $sql = "SELECT * FROM content ORDER BY date_time";
-        $result = mysqli_query($link, $sql);
+        $select=$pdo->prepare("SELECT * FROM content ORDER BY date_time");
+        $select->execute();
         $message = new Message();
 
         $act = $_GET['act'];
@@ -105,16 +106,16 @@
             break;
         }
 
-        while ($row = $result->fetch_row()) {
+        while ($row = $select->fetch()) {
         ?>
             <div class="header">
                 <p>
                     <?php
-                    echo $row[1], "&nbsp;&nbsp;发布时间： ", $row[3], "&nbsp;&nbsp;";
+                    echo $row['username'], "&nbsp;&nbsp;发布时间： ", $row['date_time'], "&nbsp;&nbsp;";
                     if ($row[1] = $_SESSION['username']) {
                         ?>
-                        <a href="modify-front.php?id=<?php echo $row[0]?>&messages=<?php echo $row[2]?>">修改留言</a>
-                        <a href="index.php?act=delMsg&id=<?php echo $row[0]?>">删除留言</a>
+                        <a href="modify-front.php?id=<?php echo $row['id']?>&messages=<?php echo $row['messages']?>">修改留言</a>
+                        <a href="index.php?act=delMsg&id=<?php echo $row['id']?>">删除留言</a>
                         <?php
                     }
                     ?>
@@ -122,7 +123,7 @@
             </div>
             <div class="container">
                 <?php
-                    echo $row[2];
+                    echo $row['messages'];
                 ?>
             </div>
         <?php 
